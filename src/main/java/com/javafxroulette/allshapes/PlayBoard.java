@@ -1,9 +1,11 @@
 package com.javafxroulette.allshapes;
 
 
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.effect.BlendMode;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -15,9 +17,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PlayBoard {
- //   private Image bgImage = new Image("file:D:\\javafx-roulette\\src\\main\\resources\\templates\\scene.jpg");
+    //   private Image bgImage = new Image("file:D:\\javafx-roulette\\src\\main\\resources\\templates\\scene.jpg");
 
     private List<Rectangle> rectangles = new ArrayList();
+    private List<StackPane> stackPanesList = new ArrayList();
 
     public GridPane createGrid() {
 
@@ -27,25 +30,31 @@ public class PlayBoard {
 
         PlayRectangles pr = new PlayRectangles();
         TextInRectangle tr = new TextInRectangle();
+        StackPanePlayRectangle stackPane = new StackPanePlayRectangle();
 
         // Creating 36 Rectangles in correct colors, adding them to the Rectangle List
 
         for (int i=1;i<37;i++) {
             Rectangle rectangle = null;
+            StackPane sp = null;
 
             if(i== 2 || i==4 || i==6 || i==8 || i==10 || i==11 || i==13 || i==15 || i==17 || i== 20 || i==22 || i==24 || i==26 || i==28 || i==29 || i==33 || i==31 || i==35 ) {
                 rectangle = pr.createRectangle(56.0,70.0,15.0,"Black");
                 rectangles.add(rectangle);
+                sp = stackPane.createStackPaneBlack(("" +i),rectangle);
+                stackPanesList.add(sp);
 
             } else {
                 rectangle = pr.createRectangle(56.0,70.0,15.0,"Red");
                 rectangles.add(rectangle);
+                sp = stackPane.createStackPaneRed(("" +i),rectangle);
+                stackPanesList.add(sp);
             }
         }
 
         // Adding first column, and insert number 0 position
 
-        StackPane zeroGroup = new StackPane();
+
 
         Text zeroText = new Text("0");
         zeroText.setFill(Color.WHITE);
@@ -53,6 +62,9 @@ public class PlayBoard {
         zeroText.setRotate(270);
 
         Rectangle zeroRectangle = pr.createRectangle(56.0,219.0,15.0,"Green");
+        zeroRectangle.setId("1");
+
+        StackPane zeroGroup = stackPane.createStackPaneGreen("0", zeroRectangle);
 
         zeroGroup.getChildren().addAll(zeroRectangle, zeroText);
 
@@ -63,8 +75,9 @@ public class PlayBoard {
 
         // Set correct positions for rectangles
         for (int i = 0; i < 3; i++) {
-            StackPane sp = null;
+
             int startRectangle;
+
             if (i == 0) {
                 startRectangle = 3;
             } else if (i == 1) {
@@ -75,7 +88,6 @@ public class PlayBoard {
 
             for (int j = 0; j < 12; j++) {
 
-                sp = new StackPane();
                 Text textFill = new Text();
 
                 textFill.setText(Integer.toString(startRectangle));
@@ -83,11 +95,16 @@ public class PlayBoard {
                 textFill.setFont(Font.font(java.awt.Font.SANS_SERIF, FontWeight.BOLD, 38));
                 textFill.setRotate(270);
 
+                //Getting correct Rectangle and StackPane
                 Rectangle actRectangle = rectangles.get(startRectangle-1);
+                StackPane actualSp = stackPanesList.get(startRectangle-1);
 
-                sp.getChildren().addAll(actRectangle,textFill);
-                grid.getChildren().add(sp);
-                GridPane.setConstraints(sp,j+1,i);
+                //Adding Rectangle and Text to Stack Pane
+                actualSp.getChildren().addAll(actRectangle,textFill);
+
+                //Adding Stack Pane to correct position in GridPane
+                grid.getChildren().add(actualSp);
+                GridPane.setConstraints(actualSp,j+1,i);
 
                 startRectangle = startRectangle + 3;
             }
@@ -183,9 +200,9 @@ public class PlayBoard {
 
 
         grid.setAlignment(Pos.CENTER);
-     //   grid.setPadding(new Insets(5));
-       // grid.setGridLinesVisible(true);
-  //      grid.setBackground(background);
+        //   grid.setPadding(new Insets(5));
+        // grid.setGridLinesVisible(true);
+        //      grid.setBackground(background);
         return grid;
     }
 }
