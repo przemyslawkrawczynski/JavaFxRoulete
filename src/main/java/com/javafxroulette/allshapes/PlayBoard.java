@@ -1,11 +1,6 @@
 package com.javafxroulette.allshapes;
 
-
-import javafx.event.EventHandler;
 import javafx.geometry.Pos;
-import javafx.scene.Group;
-import javafx.scene.effect.BlendMode;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -13,13 +8,17 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 public class PlayBoard {
-    //   private Image bgImage = new Image("file:D:\\javafx-roulette\\src\\main\\resources\\templates\\scene.jpg");
 
-    private List<Rectangle> rectangles = new ArrayList();
+    private ArrayList<Rectangle> rectangles = new ArrayList();
+    private HashMap<Integer, String> numberColorList = new HashMap<>();
     private List<StackPane> stackPanesList = new ArrayList();
 
     public GridPane createGrid() {
@@ -43,12 +42,14 @@ public class PlayBoard {
                 rectangles.add(rectangle);
                 sp = stackPane.createStackPaneBlack(("" +i),rectangle);
                 stackPanesList.add(sp);
+                numberColorList.put(i,"Black");
 
             } else {
                 rectangle = pr.createRectangle(56.0,70.0,15.0,"Red");
                 rectangles.add(rectangle);
                 sp = stackPane.createStackPaneRed(("" +i),rectangle);
                 stackPanesList.add(sp);
+                numberColorList.put(i,"Red");
             }
         }
 
@@ -205,5 +206,11 @@ public class PlayBoard {
         //      grid.setBackground(background);
         return grid;
     }
+
+    public HashMap<Integer, String> getNumberColorList() {
+        return numberColorList;
+    }
+
+    public ArrayList<Rectangle> getRectangles() { return rectangles; }
 }
 

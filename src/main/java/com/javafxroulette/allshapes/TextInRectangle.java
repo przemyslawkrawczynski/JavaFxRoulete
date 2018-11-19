@@ -1,5 +1,6 @@
 package com.javafxroulette.allshapes;
 
+
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -24,11 +25,12 @@ public class TextInRectangle {
         return textFill;
     }
 
-    public Text createTextHistoryBox(String text, Double size, Color color) {
+    public Text createHistoryBoxCorrectColorText(String text, Double size, Color color) {
         Text textFill = new Text();
         textFill.setText(text);
         textFill.setFill(color);
         textFill.setFont(Font.font(java.awt.Font.SANS_SERIF, FontWeight.BOLD, size));
         return textFill;
     }
+
 }

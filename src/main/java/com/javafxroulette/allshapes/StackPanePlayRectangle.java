@@ -13,7 +13,7 @@ public class StackPanePlayRectangle {
         StackPane stackPane = new StackPane();
         stackPane.setId(id);
 
-        stackPane.setOnMouseEntered(new EventHandler<MouseEvent>() {
+        stackPane.setOnMouseMoved(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
                 rectangle.setFill(Color.rgb(218, 125, 19));
@@ -24,6 +24,19 @@ public class StackPanePlayRectangle {
             @Override
             public void handle(MouseEvent event) {
                 rectangle.setFill(Color.rgb(227, 30, 37));
+            }
+        });
+
+        stackPane.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                rectangle.setFill(Color.rgb(218, 125, 19));
+                stackPane.setOnMouseExited(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent event) {
+                        rectangle.setFill(Color.rgb(218, 125, 19));
+                    }
+                });
             }
         });
         return stackPane;
