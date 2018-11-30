@@ -1,19 +1,14 @@
-package com.javafxroulette.roulette;
-import javafx.scene.layout.HBox;
+package com.javafxroulette;
+
 import javafx.scene.text.Text;
+
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Random;
 
 public class SpinRoulette extends Thread {
 
     private int[] drawNumbers;
     private Text text;
-    private HBox place;
-    private ArrayList<Integer> lastDrawnNumbers;
-    private HashMap<Integer, String> correctColorsList;
-    private HistoryBoxView hb;
 
     public SpinRoulette(Text text, int[] drawNumbers) {
         this.drawNumbers = drawNumbers;
@@ -38,13 +33,10 @@ public class SpinRoulette extends Thread {
                 int number = drawNumbers[num];
                 checkedTime = checkedTime.plusNanos(200000000);
                 changeCircleFill(number, text);
-        //        System.out.println(number);
+                //        System.out.println(number);
                 num++;
-
             }
-
         }
-
     }
 
     public void changeCircleFill(int num, Text text) {
@@ -52,3 +44,5 @@ public class SpinRoulette extends Thread {
         text.setText(number);
     }
 }
+
+

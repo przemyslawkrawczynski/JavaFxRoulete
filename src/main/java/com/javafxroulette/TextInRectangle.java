@@ -1,5 +1,4 @@
-package com.javafxroulette.allshapes;
-
+package com.javafxroulette;
 
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;

@@ -1,7 +1,4 @@
-package com.javafxroulette.allshapes;
-
-import javafx.event.EventHandler;
-import javafx.scene.input.MouseEvent;
+package com.javafxroulette;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
@@ -24,7 +21,7 @@ public class PlayRectangles extends Rectangle{
             rectangle.setStrokeWidth(4.0);
 
         } else if (color.equals("Green")) {
-            rectangle.setFill(Color.rgb(72,156,70));
+            rectangle.setFill(Color.rgb(49,98,49));
             rectangle.setStroke(Color.WHITE);
             rectangle.setStrokeWidth(4.0);
         }
