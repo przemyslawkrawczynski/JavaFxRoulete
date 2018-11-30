@@ -33,7 +33,7 @@ public class StartPanel {
 
         TextField userNameText = new TextField("Select Username");
         userNameText.setPrefSize(120,30);
-        userNameText.setStyle( "-fx-border-color: grey; -fx-border-width: 1 1 1 1;-fx-border-radius:5; -fx-background-color: transparent; -fx-text-fill: white");
+        userNameText.setStyle( "-fx-border-color: grey; -fx-border-width: 2 2 2 2;-fx-border-radius:5;-fx-background-insets: 5,5,5,5; -fx-background-color: rgb(244,244,244); -fx-opacity: 80%; -fx-text-fill: grey");
 
         startPanel.getChildren().addAll(userNameLabel, userNameText);
         GridPane.setConstraints(userNameLabel, 0,0,1,1);
@@ -53,7 +53,9 @@ public class StartPanel {
 
         ChoiceBox insertAmount = new ChoiceBox();
         insertAmount.getItems().addAll("1000", "2000","5000", "10000");
-        insertAmount.setStyle( "-fx-border-color: grey; -fx-border-width: 1 1 1 1;-fx-border-radius:5; -fx-background-color: transparent; -fx-text-fill: white");
+        insertAmount.setValue("1000");
+        player.setAmount(1000);
+        insertAmount.setStyle("-fx-border-color: grey; -fx-border-width: 2 2 2 2;-fx-border-radius:5;-fx-background-insets: 5,5,5,5; -fx-background-color: rgb(244,244,244); -fx-opacity: 80%; -fx-text-fill: grey");
         insertAmount.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -67,7 +69,7 @@ public class StartPanel {
         GridPane.setConstraints(insertAmount, 1,1,1,1);
 
 
-        Button startButton = new Button("Star Game");
+        Button startButton = new Button("Start Game");
         startButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -86,6 +88,12 @@ public class StartPanel {
 
         startPanel.getChildren().add(startButton);
         GridPane.setConstraints(startButton, 1,2);
+
+        ResultsRow resultsRow = new ResultsRow();
+        VBox resultTable = resultsRow.createResultTable();
+
+        startPanel.getChildren().add(resultTable);
+        GridPane.setConstraints(resultTable, 4, 0, 3, 5);
 
         startPanelStackPane.getChildren().addAll(startPanel);
 
